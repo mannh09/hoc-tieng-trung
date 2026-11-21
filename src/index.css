@@ -1,0 +1,41 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  --font-han: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+}
+
+html, body, #root { height: 100%; }
+body { @apply bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 antialiased; }
+
+.flip { perspective: 1200px; }
+.flip-inner { transition: transform .5s cubic-bezier(.2,.8,.2,1); transform-style: preserve-3d; }
+.flip-inner.flipped { transform: rotateY(180deg); }
+.face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.face-back { transform: rotateY(180deg); }
+
+@keyframes pop { 0% { transform: scale(.9); opacity: 0 } 100% { transform: scale(1); opacity: 1 } }
+.pop { animation: pop .25s ease-out; }
+::-webkit-scrollbar { width: 10px; } ::-webkit-scrollbar-thumb { background: #94a3b855; border-radius: 10px; }
+
+/* ===== DocViewer ===== */
+.doc { font-size: 16px; }
+.doc h1 { @apply text-3xl font-bold tracking-tight; }
+.doc h2 { @apply mt-10 border-b border-slate-200 pb-2 text-xl dark:border-slate-700; }
+.doc :where(td, th, p, li, blockquote, strong, code) { font-family: var(--font-sans), var(--font-han); }
+.doc table th { @apply bg-slate-50 px-3 py-2.5 text-left font-semibold text-slate-700 dark:bg-slate-800 dark:text-slate-200; }
+.doc table td { @apply border-t border-slate-100 px-3 py-2.5 align-top dark:border-slate-800; }
+.doc table tr:hover td { @apply bg-orange-50/60 dark:bg-orange-500/5; }
+.doc table td:first-child { @apply font-medium; }
+.doc blockquote { @apply rounded-r-xl border-l-4 border-orange-400 bg-orange-50/60 py-1 not-italic dark:bg-orange-500/5; }
+.doc blockquote p::before, .doc blockquote p::after { content: none; }
+.doc code::before, .doc code::after { content: none; }
+.doc code { @apply rounded-md bg-slate-100 px-1.5 py-0.5 font-normal dark:bg-slate-800; }
+.doc details { @apply mt-6 rounded-2xl border-2 border-dashed border-emerald-300 bg-emerald-50/50 px-5 py-3 dark:border-emerald-700 dark:bg-emerald-500/5; }
+.doc details summary { @apply cursor-pointer font-semibold text-emerald-700 dark:text-emerald-300; }
+.doc details[open] summary { @apply mb-3; }
+.doc hr { @apply my-8; }
+.doc blockquote { @apply font-normal leading-8; }
+.doc table td:first-child { font-size: 1.15em; }
